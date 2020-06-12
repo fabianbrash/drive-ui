@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
-import './bulma.css';
+/* import './App.css'; */
 
 class App extends Component {
 
@@ -21,7 +20,8 @@ class App extends Component {
 
   async componentDidMount() {
 
-    const apiURL = 'https://jsonplaceholder.typicode.com/posts'
+    const apiURL = '/win_low_root.json'
+    const apiURLAll = '/all.json'
     
 
     /* This uses promises
@@ -35,7 +35,7 @@ class App extends Component {
 
   */
 
-  const response = await fetch(apiURL)
+  const response = await fetch(apiURLAll)
   const data = await response.json()
   console.log(data)
   this.setState({data: data, isLoading: false})
@@ -46,22 +46,19 @@ class App extends Component {
 
     const { data } = this.state;
 
-    const postsList = data.map(post => {
+    const vmsList = data.map((vm, i )=> {
 
       /* console.log(post) */
       return (
-        <div key={post.id}>
-          <article className="message is-link is-medium">
-            <div className="message-header">
-              <p>{post.title}</p>
-            </div>
-            <div className="message-body">
-              {post.body}
-            </div>
-          </article>
-          <span></span>
-
-        </div>
+          <tbody key={vm.Name}>
+            <tr>
+              <th scope="row">{i + 1}</th>
+              <td>{vm.Name}</td>
+              <td>{vm.DiskPath}</td>
+              <td>{vm.freespace}GB</td>
+              <td>{vm.capacity}GB</td>
+            </tr>
+          </tbody>
      
       )
 
@@ -72,7 +69,7 @@ class App extends Component {
 
       return(
         <div className="container">
-          <h2 className="title is-2 has-text-centered">Loading...</h2>
+          <h2 className="white-text">Loading...</h2>
         </div>
       )
     }
@@ -80,17 +77,82 @@ class App extends Component {
     if(!this.state.data) {
       return (
       <div className="container">
-        <h2 className="title is-2 has-text-centered">No posts found...</h2>
+        <h2 className="white-text">No vms found...</h2>
       </div>
       )
     }
 
     return (
-    <div className="container is-fluid">
-     <div className="container">
-       {postsList}
+    <div className="container-fluid mt-4">
+      <div className="card card-cascade narrower">
+        <div className="view view-cascade gradient-card-header peach-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center z-depth-3">
+        <div>
+      <button type="button" className="btn btn-outline-white btn-rounded btn-sm px-2">
+        <i className="fas fa-th-large mt-0"></i>
+      </button>
+      <button type="button" className="btn btn-outline-white btn-rounded btn-sm px-2">
+        <i className="fas fa-columns mt-0"></i>
+      </button>
+    </div>
+    <a href="/" className="white-text mx-3">VMs WITH LOW C: SPACE</a>
+    <div>
+      <button type="button" className="btn btn-outline-white btn-rounded btn-sm px-2">
+        <i className="fas fa-pencil-alt mt-0"></i>
+      </button>
+      <button type="button" className="btn btn-outline-white btn-rounded btn-sm px-2">
+        <i className="far fa-trash-alt mt-0"></i>
+      </button>
+      <button type="button" className="btn btn-outline-white btn-rounded btn-sm px-2">
+        <i className="fas fa-info-circle mt-0"></i>
+      </button>
+    </div>
+      </div>
+
+      <div className="px-4">
+
+    <div className="table-wrapper">
+    
+      <table className="table table-hover mb-0">
+
+      <thead>
+          <tr>
+            {/*<th>
+              <input className="form-check-input" type="checkbox" id="checkbox">
+              <label className="form-check-label" for="checkbox" className="mr-2 label-table"></label></input>
+            </th>*/}
+            <th className="th-lg">
+              <a href="/">#
+                <i className="fas fa-sort ml-1"></i>
+              </a>
+              </th>
+            <th className="th-lg">
+              <a href="/">Name
+                <i className="fas fa-sort ml-1"></i>
+              </a>
+            </th>
+            <th className="th-lg">
+              <a href="/">DiskPath
+                <i className="fas fa-sort ml-1"></i>
+              </a>
+            </th>
+            <th className="th-lg">
+              <a href="/">FreeSpace
+                <i className="fas fa-sort ml-1"></i>
+              </a>
+            </th>
+            <th className="th-lg">
+              <a href="/">Capacity
+                <i className="fas fa-sort ml-1"></i>
+              </a>
+            </th>
+          </tr>
+        </thead>
+       {vmsList}
+     </table>
+     </div>
      </div>
     </div>
+  </div>
   );
  }
 
@@ -98,10 +160,10 @@ class App extends Component {
 
 /* Data model
 
-userId: not unique
-id: this will be my key
-title:
-body:
+Name: this will be our key
+DiskPath: this will be my key
+capacity:
+freespace:
 
 */
 
