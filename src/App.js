@@ -85,7 +85,7 @@ class App extends Component {
     return (
     <div className="container-fluid mt-4">
       <div className="card card-cascade narrower">
-        <div className="view view-cascade gradient-card-header peach-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center z-depth-3">
+        <div className="view view-cascade mdb-color py-2 mx-4 mb-3 d-flex narrower justify-content-between align-items-center z-depth-3">
         <div>
       <button type="button" className="btn btn-outline-white btn-rounded btn-sm px-2">
         <i className="fas fa-th-large mt-0"></i>
@@ -110,7 +110,7 @@ class App extends Component {
 
       <div className="px-4">
 
-    <div className="table-wrapper">
+    <div className="table-responsive">
     
       <table className="table table-hover mb-0">
 
@@ -165,6 +165,10 @@ DiskPath: this will be my key
 capacity:
 freespace:
 
+*/
+
+/*
+gradient-card-header blue-gradient
 */
 
 export default App;
